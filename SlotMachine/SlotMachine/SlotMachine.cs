@@ -42,5 +42,37 @@ namespace SlotMachineModel
 
             return betAmount * firstReel.getCurrentSymbol();
         }
+
+        public List<int> GetTopRow()
+        {
+            List<int> topRow = new List<int>();
+
+            topRow.Add(firstReel.getAboveSymbol());
+            topRow.Add(secondReel.getAboveSymbol());
+            topRow.Add(thirdReel.getAboveSymbol());
+
+            return topRow;
+        }
+
+        public List<int> GetBottomRow()
+        {
+            List<int> bottomRow = new List<int>();
+
+            bottomRow.Add(firstReel.getBelowSymbol());
+            bottomRow.Add(secondReel.getBelowSymbol());
+            bottomRow.Add(thirdReel.getBelowSymbol());
+            return bottomRow;
+        }
+
+        public List<int> getMiddleRow()
+        {
+            List<int> middleRow = new List<int>();
+
+            middleRow.Add(firstReel.getBelowSymbol());
+            middleRow.Add(secondReel.getBelowSymbol());
+            middleRow.Add(thirdReel.getBelowSymbol());
+
+            return middleRow;
+        }
     }
 }
