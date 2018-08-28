@@ -16,18 +16,18 @@ namespace SlotMachineModel
         /*
          * Creates a new reel with the symbols 1-10 in order
          */
-        public Reel()
+        public Reel(Random randPaul)
         {
             symbols = new List<int>();
           
-            for(int i = 1; i <= 10; i++)
+            for(int i = 1; i <= 3; i++)
             {
                 symbols.Add(i);
             }
 
             position = 0;
 
-            rando = new Random();
+            rando = randPaul;
         }
 
         /*
@@ -35,7 +35,7 @@ namespace SlotMachineModel
          */
         public void spin()
         {
-            position = rando.Next(10);
+            position = rando.Next(symbols.Count);
         }
 
         /*
@@ -60,7 +60,7 @@ namespace SlotMachineModel
         public int getBelowSymbol()
         {
             // C#'s % symbol does the remained after division not modulus ugh.
-            return symbols[(position + 9) % symbols.Count];
+            return symbols[(position + (symbols.Count - 1)) % symbols.Count];
         }
     }
 }

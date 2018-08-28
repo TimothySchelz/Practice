@@ -16,31 +16,36 @@ namespace SlotMachineModel
 
         public SlotMachine(int startingCredit)
         {
-            playerCredit = startingCredit;
+            Random randPaul = new Random();
+
+            PlayerCredit = startingCredit;
             BetAmount = 5;
-            firstReel = new Reel();
-            secondReel = new Reel();
-            thirdReel = new Reel();
+            firstReel = new Reel(randPaul);
+            secondReel = new Reel(randPaul);
+            thirdReel = new Reel(randPaul);
         }
 
         public int BetAmount { get => betAmount; set => betAmount = value; }
+        public int PlayerCredit { get => playerCredit; private set => playerCredit = value; }
 
         /*
          * Spins the reels and returns how much is won.
          */
         public int Spin()
         {
-            playerCredit -= betAmount;
+            PlayerCredit -= betAmount;
             firstReel.spin();
             secondReel.spin();
             thirdReel.spin();
 
             if(firstReel.getCurrentSymbol() == secondReel.getCurrentSymbol() && secondReel.getCurrentSymbol() == thirdReel.getCurrentSymbol())
             {
-                playerCredit += betAmount * firstReel.getCurrentSymbol();
+                PlayerCredit += betAmount * firstReel.getCurrentSymbol();
+
+                return betAmount * firstReel.getCurrentSymbol();
             }
 
-            return betAmount * firstReel.getCurrentSymbol();
+            return -betAmount;
         }
 
         public List<int> GetTopRow()
@@ -64,13 +69,13 @@ namespace SlotMachineModel
             return bottomRow;
         }
 
-        public List<int> getMiddleRow()
+        public List<int> GetMiddleRow()
         {
             List<int> middleRow = new List<int>();
 
-            middleRow.Add(firstReel.getBelowSymbol());
-            middleRow.Add(secondReel.getBelowSymbol());
-            middleRow.Add(thirdReel.getBelowSymbol());
+            middleRow.Add(firstReel.getCurrentSymbol());
+            middleRow.Add(secondReel.getCurrentSymbol());
+            middleRow.Add(thirdReel.getCurrentSymbol());
 
             return middleRow;
         }
