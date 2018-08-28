@@ -19,7 +19,7 @@ namespace SlotGUI
         {
             InitializeComponent();
 
-            guts = new SlotMachine(50);
+            guts = new SlotMachine(100);
         }
 
         private void doABet(object sender, EventArgs e)
