@@ -20,6 +20,8 @@ namespace SlotGUI
             InitializeComponent();
 
             guts = new SlotMachine(100);
+
+            UpdateDisplays();
         }
 
         private void doABet(object sender, EventArgs e)
